@@ -479,10 +479,51 @@
                                     className: "text-gray-600"
                                 }, "/month")
                             ),
-                            React.createElement('button', {
-                                onClick: handleUpgrade,
-                                className: "w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 font-semibold mb-3"
-                            }, "Upgrade Now"),
+                           React.createElement('form', {
+    action: "https://www.paypal.com/cgi-bin/webscr",
+    method: "post",
+    target: "_blank",
+    className: "w-full"
+},
+    React.createElement('input', {
+        type: "hidden",
+        name: "cmd", 
+        value: "_s-xclick"
+    }),
+    React.createElement('input', {
+        type: "hidden",
+        name: "hosted_button_id",
+        value: "YOUR_BUTTON_ID_HERE"  // <div id="paypal-button-container-P-4J6036679W450721KNA3SMIY"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AWLH24bLO4ADQGJeir8Xf0DvJmkA00LxyHJK_zB4bnvdE7kyC_8sqC8mZw-2O02sd8Db8K155NibrE10&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+<script>
+  paypal.Buttons({
+      style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe'
+      },
+      createSubscription: function(data, actions) {
+        return actions.subscription.create({
+          /* Creates the subscription */
+          plan_id: 'P-4J6036679W450721KNA3SMIY'
+        });
+      },
+      onApprove: function(data, actions) {
+        alert(data.subscriptionID); // You can add optional success message for the subscriber here
+      }
+  }).render('#paypal-button-container-P-4J6036679W450721KNA3SMIY'); // Renders the PayPal button
+</script> }),
+    React.createElement('input', {
+        type: "submit",
+        value: "Upgrade to Pro - $1.99/month",
+        className: "w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl hover:from-indigo-700 hover:to-purple-700 font-semibold cursor-pointer"
+    })
+),
+
+                                
+                               
+                            
                             React.createElement('button', {
                                 onClick: () => setShowUpgrade(false),
                                 className: "w-full bg-gray-200 text-gray-700 py-4 rounded-xl font-semibold"
